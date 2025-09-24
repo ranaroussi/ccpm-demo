@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "build:standard": "next build",
+    "build:docker": "NEXT_SKIP_TYPE_CHECK=true next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

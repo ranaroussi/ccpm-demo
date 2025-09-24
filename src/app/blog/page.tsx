@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { getAllTags, getPaginatedBlogPosts } from '@/lib/mdx';
 
 interface BlogPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
     tag?: string;
-  };
+  }>;
 }
 
 export const metadata: Metadata = {
@@ -24,9 +24,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage({ searchParams }: BlogPageProps) {
-  const currentPage = parseInt(searchParams.page || '1', 10);
-  const selectedTag = searchParams.tag;
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const params = await searchParams;
+  const currentPage = parseInt(params.page || '1', 10);
+  const selectedTag = params.tag;
 
   // Get paginated posts
   const { posts, pagination } = getPaginatedBlogPosts(currentPage, 6);

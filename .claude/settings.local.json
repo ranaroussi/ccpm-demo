@@ -46,7 +46,8 @@
       "Bash(for:*)",
       "Bash(do [ -f \"$f\" ])",
       "Bash(done)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(docker build:*)"
     ]
   }
 }
