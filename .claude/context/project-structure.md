@@ -21,7 +21,6 @@ author: Claude Code PM System
 ## Claude PM System Structure (.claude/)
 
 ### Core Configuration
-
 ```
 .claude/
 ├── ccpm.config             # CCPM configuration for GitHub integration
@@ -30,7 +29,6 @@ author: Claude Code PM System
 ```
 
 ### Project Management
-
 ```
 .claude/
 ├── prds/                   # Product Requirements Documents
@@ -54,7 +52,6 @@ author: Claude Code PM System
 ```
 
 ### Automation & Scripts
-
 ```
 .claude/
 ├── scripts/                # Automation scripts
@@ -131,13 +128,11 @@ Based on the PRD and Epic, the following structure will be created:
 ## File Naming Conventions
 
 ### Current System Files
-
 - **Scripts**: Kebab-case with .sh extension (e.g., `epic-status.sh`)
 - **Markdown**: Kebab-case for documents, numeric for tasks (e.g., `base-nextjs-app.md`, `003.md`)
 - **Configuration**: Lowercase with appropriate extension (e.g., `ccpm.config`)
 
 ### Planned Application Files
-
 - **React Components**: PascalCase (e.g., `UserProfile.jsx`)
 - **Pages/Routes**: Kebab-case folders (e.g., `/dashboard/user-settings/`)
 - **API Routes**: Kebab-case (e.g., `/api/auth/login`)
@@ -147,14 +142,12 @@ Based on the PRD and Epic, the following structure will be created:
 ## Module Organization
 
 ### Current Modules
-
 1. **Project Management** - PRDs, Epics, Tasks
 2. **Automation** - Shell scripts for PM operations
 3. **Configuration** - Settings and environment config
 4. **Documentation** - Context and help files
 
 ### Planned Application Modules
-
 1. **Authentication** - NextAuth.js integration
 2. **Database** - Prisma ORM with PostgreSQL
 3. **UI Components** - shadcn/ui with Tailwind CSS
@@ -165,13 +158,11 @@ Based on the PRD and Epic, the following structure will be created:
 ## Key Directories
 
 ### Development Focus Areas
-
 - `.claude/prds/` - Product requirements and specifications
 - `.claude/epics/` - Development tasks and tracking
 - `.claude/scripts/pm/` - Project management automation
 
 ### Future Application Directories
-
 - `app/` - Next.js application routes and pages
 - `components/` - Reusable UI components
 - `lib/` - Business logic and utilities
@@ -181,13 +172,11 @@ Based on the PRD and Epic, the following structure will be created:
 ## Integration Points
 
 ### Current System
-
 - GitHub API via `gh` CLI for issue management
 - Git for version control
 - Shell scripts for automation
 
 ### Planned Application
-
 - NextAuth.js for authentication
 - Prisma for database access
 - MDX for content management

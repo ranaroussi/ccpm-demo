@@ -14,7 +14,6 @@ Building a **minimal, self-hostable Next.js SaaS starter** that provides essenti
 ## What It Does
 
 ### Core Functionality
-
 The Next.js SaaS Starter is a production-ready template that provides:
 
 1. **Complete Authentication System**
@@ -44,18 +43,14 @@ The Next.js SaaS Starter is a production-ready template that provides:
 ## Why It Exists
 
 ### Problem Statement
-
 Developers building SaaS applications face a common challenge: spending weeks setting up basic infrastructure (authentication, database, UI components, deployment) before writing any business logic. Existing solutions are either:
-
 - **Too complex**: Over-engineered with unnecessary abstractions
 - **Too minimal**: Missing critical production features
 - **Too expensive**: Require costly SaaS subscriptions
 - **Too restrictive**: Lock developers into specific platforms
 
 ### Solution
-
 This starter provides the **optimal middle ground**:
-
 - Complete enough to be production-ready
 - Simple enough to understand and modify
 - Self-hostable for full control
@@ -64,39 +59,32 @@ This starter provides the **optimal middle ground**:
 ## Project Scope
 
 ### In Scope
-
 ✅ **Authentication & Security**
-
 - Username/password authentication
 - Session management
 - Password reset flows
 - Basic role-based access (user/admin)
 
 ✅ **User Experience**
-
 - Responsive web application
 - Dashboard for authenticated users
 - Profile management
 - Admin user management interface
 
 ✅ **Developer Experience**
-
 - Quick setup (< 10 minutes)
 - Clear project structure
 - Comprehensive documentation
 - Docker deployment support
 
 ✅ **Content & Communication**
-
 - MDX-based documentation
 - Email notifications
 - Error pages
 - Loading states
 
 ### Out of Scope
-
 ❌ **Advanced Features**
-
 - Payment processing
 - Multi-tenancy
 - Real-time features (WebSockets)
@@ -104,14 +92,12 @@ This starter provides the **optimal middle ground**:
 - Advanced analytics
 
 ❌ **Extended Authentication**
-
 - Social login providers
 - Two-factor authentication
 - SSO/SAML
 - Advanced permission systems
 
 ❌ **Infrastructure Services**
-
 - CI/CD pipelines
 - Monitoring/logging services
 - Backup systems
@@ -157,7 +143,6 @@ This starter provides the **optimal middle ground**:
 ## Success Criteria
 
 ### Launch Criteria
-
 - ✅ All authentication flows functional
 - ✅ Docker deployment successful
 - ✅ Documentation complete
@@ -165,18 +150,16 @@ This starter provides the **optimal middle ground**:
 - ✅ Security review passed
 
 ### Quality Metrics
-
-| Metric            | Target       | Measurement                        |
-| ----------------- | ------------ | ---------------------------------- |
-| Setup Time        | < 10 minutes | Time from clone to running locally |
-| Deployment Time   | < 30 minutes | Time to production deployment      |
-| Page Load Speed   | < 2 seconds  | Lighthouse measurement             |
-| Bundle Size       | < 200KB      | Initial JavaScript payload         |
-| Docker Image Size | < 100MB      | Compressed image size              |
-| Code Coverage     | > 70%        | Critical paths tested              |
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Setup Time | < 10 minutes | Time from clone to running locally |
+| Deployment Time | < 30 minutes | Time to production deployment |
+| Page Load Speed | < 2 seconds | Lighthouse measurement |
+| Bundle Size | < 200KB | Initial JavaScript payload |
+| Docker Image Size | < 100MB | Compressed image size |
+| Code Coverage | > 70% | Critical paths tested |
 
 ### User Feedback Targets
-
 - Developer satisfaction: > 90%
 - Documentation clarity: > 85%
 - Setup success rate: > 95%
@@ -185,13 +168,11 @@ This starter provides the **optimal middle ground**:
 ## Key Stakeholders
 
 ### Direct Stakeholders
-
 1. **Developers/Founders**: Primary users building SaaS products
 2. **End Users**: Customers using applications built with the starter
 3. **Contributors**: Open-source community members
 
 ### Indirect Stakeholders
-
 1. **Hosting Providers**: Platforms where applications are deployed
 2. **Service Providers**: Email, database, monitoring services
 3. **Technology Partners**: Next.js, Vercel, Prisma teams
@@ -199,21 +180,18 @@ This starter provides the **optimal middle ground**:
 ## Constraints
 
 ### Technical Constraints
-
 - Must use Next.js 15 with App Router
 - JavaScript only (no TypeScript in v1)
 - Single database support (PostgreSQL)
 - Node.js 18+ required
 
 ### Resource Constraints
-
 - Single developer effort
 - 2-3 week timeline
 - No budget for paid services
 - Limited to open-source dependencies
 
 ### Business Constraints
-
 - Must remain open-source
 - Cannot include proprietary code
 - No vendor-specific features
@@ -222,21 +200,18 @@ This starter provides the **optimal middle ground**:
 ## Risk Assessment
 
 ### High Priority Risks
-
 1. **Security Vulnerabilities**
    - Mitigation: Use established libraries, security best practices
 2. **Performance Issues**
    - Mitigation: Performance testing, optimization guidelines
 
 ### Medium Priority Risks
-
 1. **Adoption Challenges**
    - Mitigation: Comprehensive docs, video tutorials
 2. **Maintenance Burden**
    - Mitigation: Minimal dependencies, clear architecture
 
 ### Low Priority Risks
-
 1. **Technology Changes**
    - Mitigation: Use stable versions, document upgrade paths
 2. **Competition**
@@ -245,21 +220,18 @@ This starter provides the **optimal middle ground**:
 ## Timeline Overview
 
 ### Week 1: Foundation
-
 - Project setup and configuration
 - Database schema and Prisma setup
 - NextAuth integration
 - Basic UI components
 
 ### Week 2: Features
-
 - User management implementation
 - MDX content system
 - Email integration
 - Docker configuration
 
 ### Week 3: Polish
-
 - Performance optimization
 - Security hardening
 - Documentation writing
@@ -268,13 +240,11 @@ This starter provides the **optimal middle ground**:
 ## Budget & Resources
 
 ### Development Resources
-
 - **Developer Time**: 40-60 hours total
 - **Tools**: All open-source/free
 - **Services**: Free tiers sufficient for development
 
 ### Operational Costs
-
 - **Hosting**: User responsibility (self-hosted)
 - **Domain**: Not included
 - **Email Service**: User provides SMTP
@@ -283,14 +253,12 @@ This starter provides the **optimal middle ground**:
 ## Expected Outcomes
 
 ### Immediate Outcomes
-
 - Functional SaaS starter template
 - Complete documentation set
 - Docker deployment solution
 - Example implementations
 
 ### Long-term Impact
-
 - Reduced time-to-market for SaaS products
 - Lower barrier to entry for indie developers
 - Increased adoption of self-hosted solutions

@@ -35,7 +35,6 @@ Developers building SaaS applications often spend significant time setting up ba
 ### User Journeys
 
 **Developer Journey:**
-
 1. Clone repository and install dependencies
 2. Configure environment variables for database and auth
 3. Customize branding and content
@@ -43,7 +42,6 @@ Developers building SaaS applications often spend significant time setting up ba
 5. Iterate on features using established patterns
 
 **End User Journey:**
-
 1. Land on marketing/content pages
 2. Sign up with email and password
 3. Verify email (optional based on configuration)
@@ -52,7 +50,6 @@ Developers building SaaS applications often spend significant time setting up ba
 6. Read help documentation (MDX content)
 
 ### Pain Points Being Addressed
-
 - Lengthy setup time for basic SaaS infrastructure
 - Complex authentication implementations
 - Lack of content management for documentation/help pages
@@ -64,7 +61,6 @@ Developers building SaaS applications often spend significant time setting up ba
 ### Functional Requirements
 
 **Authentication System**
-
 - Username (email) and password registration
 - Secure password hashing (bcrypt or similar)
 - Login/logout functionality
@@ -74,14 +70,12 @@ Developers building SaaS applications often spend significant time setting up ba
 - Remember me functionality
 
 **User Management**
-
 - User profile pages
 - Account settings (change password, email)
 - User roles/permissions (basic: user, admin)
 - Account deletion capability
 
 **Content Management (MDX)**
-
 - MDX file-based content for documentation/help
 - Blog/changelog functionality
 - Dynamic routing for MDX pages
@@ -90,7 +84,6 @@ Developers building SaaS applications often spend significant time setting up ba
 - SEO metadata support
 
 **Core Application Structure**
-
 - Landing page with feature overview
 - Pricing page (static initially)
 - Dashboard (authenticated area)
@@ -98,7 +91,6 @@ Developers building SaaS applications often spend significant time setting up ba
 - 404/500 error pages
 
 **UI Components**
-
 - Minimal design system
 - Form components (inputs, buttons, selects)
 - Navigation (header, sidebar for dashboard)
@@ -110,14 +102,12 @@ Developers building SaaS applications often spend significant time setting up ba
 ### Non-Functional Requirements
 
 **Performance**
-
 - First contentful paint < 1.5s
 - Time to interactive < 3s
 - Lighthouse score > 90
 - Optimized bundle size (< 200KB initial JS)
 
 **Security**
-
 - HTTPS enforcement
 - CSRF protection
 - SQL injection prevention (if using SQL)
@@ -127,14 +117,12 @@ Developers building SaaS applications often spend significant time setting up ba
 - Environment variable management
 
 **Scalability**
-
 - Stateless architecture for horizontal scaling
 - Database connection pooling
 - CDN-ready static assets
 - Efficient API routes
 
 **Development Experience**
-
 - Hot reload in development
 - Clear project structure
 - Comprehensive README
@@ -143,7 +131,6 @@ Developers building SaaS applications often spend significant time setting up ba
 - Prettier setup
 
 **Deployment**
-
 - Docker support for self-hosting
 - Environment-based configuration
 - Database migration system
@@ -153,20 +140,17 @@ Developers building SaaS applications often spend significant time setting up ba
 ## Success Criteria
 
 ### Launch Metrics
-
 - Setup time from clone to running: < 10 minutes
 - Time to deploy: < 30 minutes
 - All core features functional on day 1
 
 ### Quality Metrics
-
 - 0 critical security vulnerabilities
 - Page load time < 2 seconds
 - Mobile responsive on all pages
 - Accessibility score > 85
 
 ### Developer Adoption
-
 - Clear documentation coverage > 90%
 - Successful deployment rate > 95%
 - Positive developer feedback on simplicity
@@ -174,7 +158,6 @@ Developers building SaaS applications often spend significant time setting up ba
 ## Constraints & Assumptions
 
 ### Constraints
-
 - JavaScript only (no TypeScript in initial version)
 - Single database support initially (PostgreSQL recommended)
 - English language only for v1
@@ -182,7 +165,6 @@ Developers building SaaS applications often spend significant time setting up ba
 - Limited to server-side rendering and static generation
 
 ### Assumptions
-
 - Developers have basic Next.js knowledge
 - PostgreSQL or similar database available
 - SMTP service available for emails
@@ -216,21 +198,18 @@ The following features are explicitly NOT included in this base application:
 ## Dependencies
 
 ### External Dependencies
-
 - **Database**: PostgreSQL (or MySQL/SQLite as alternatives)
 - **Email Service**: SMTP server or service (SendGrid, Postmark, etc.)
 - **Node.js**: Version 18+ required
 - **npm/yarn**: Package manager
 
 ### Internal Team Dependencies
-
 - **Design**: Minimal design system specifications
 - **DevOps**: Deployment documentation and Docker configuration
 - **Documentation**: Initial user guides and API documentation
 - **Testing**: Basic test suite setup
 
 ### Third-Party Libraries (Core)
-
 - Next.js 14+
 - React 18+
 - MDX for content
@@ -242,7 +221,6 @@ The following features are explicitly NOT included in this base application:
 ## Technical Architecture
 
 ### Stack Overview
-
 - **Frontend**: Next.js with React, minimal CSS
 - **Backend**: Next.js API routes
 - **Database**: PostgreSQL (primary), SQLite (development)
@@ -251,7 +229,6 @@ The following features are explicitly NOT included in this base application:
 - **Deployment**: Docker containers or Node.js process
 
 ### Project Structure
-
 ```
 /
 ├── pages/
@@ -278,13 +255,11 @@ The following features are explicitly NOT included in this base application:
 ## Risks & Mitigation
 
 ### Technical Risks
-
 - **Database migrations**: Provide clear migration guides and rollback procedures
 - **Authentication vulnerabilities**: Use well-tested libraries and security best practices
 - **Performance degradation**: Implement monitoring and optimization guidelines
 
 ### Adoption Risks
-
 - **Too minimal for some use cases**: Provide clear extension guides
 - **Self-hosting complexity**: Comprehensive deployment documentation
 - **Upgrade path**: Semantic versioning and migration guides
@@ -292,28 +267,24 @@ The following features are explicitly NOT included in this base application:
 ## Timeline Estimates
 
 ### Phase 1: Core Foundation (Week 1-2)
-
 - Project setup and configuration
 - Authentication system
 - Basic UI components
 - Database schema and migrations
 
 ### Phase 2: User Features (Week 3)
-
 - User dashboard
 - Profile management
 - MDX content system
 - Email integration
 
 ### Phase 3: Polish & Documentation (Week 4)
-
 - Performance optimization
 - Security hardening
 - Documentation writing
 - Deployment guides
 
 ### Phase 4: Testing & Launch Preparation (Week 5)
-
 - Comprehensive testing
 - Docker configuration
 - Example deployments

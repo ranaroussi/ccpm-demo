@@ -10,7 +10,6 @@ author: Claude Code PM System
 ## Architectural Patterns
 
 ### Current CCPM System Architecture
-
 - **Script-Based Architecture**: Shell scripts for all operations
 - **File-Based Storage**: Markdown files for data persistence
 - **Command Pattern**: Individual scripts for specific operations
@@ -19,7 +18,6 @@ author: Claude Code PM System
 ### Planned Application Architecture
 
 #### Overall Architecture: Monolithic with Modular Design
-
 - **Pattern**: Modular monolith
 - **Reasoning**: Simplicity for self-hosting, easier deployment
 - **Structure**: Clear module boundaries within single codebase
@@ -27,7 +25,6 @@ author: Claude Code PM System
 #### Frontend Patterns
 
 ##### 1. Server Components First
-
 ```javascript
 // Default pattern: Server Component
 export default async function UserList() {
@@ -37,7 +34,6 @@ export default async function UserList() {
 ```
 
 ##### 2. Client Components for Interactivity
-
 ```javascript
 'use client';
 // Only when client-side state needed
@@ -48,7 +44,6 @@ export default function InteractiveForm() {
 ```
 
 ##### 3. Composite Component Pattern
-
 ```javascript
 // Compound components for complex UI
 <Card>
@@ -61,19 +56,17 @@ export default function InteractiveForm() {
 #### Backend Patterns
 
 ##### 1. Repository Pattern (via Prisma)
-
 ```javascript
 // Data access abstracted through Prisma
 const userRepository = {
   findAll: () => prisma.user.findMany(),
-  findById: id => prisma.user.findUnique({ where: { id } }),
-  create: data => prisma.user.create({ data }),
-  update: (id, data) => prisma.user.update({ where: { id }, data }),
+  findById: (id) => prisma.user.findUnique({ where: { id } }),
+  create: (data) => prisma.user.create({ data }),
+  update: (id, data) => prisma.user.update({ where: { id }, data })
 };
 ```
 
 ##### 2. Service Layer Pattern
-
 ```javascript
 // Business logic in service layer
 class AuthService {
@@ -81,7 +74,7 @@ class AuthService {
     const hashedPassword = await hash(password);
     const user = await userRepository.create({
       email,
-      password: hashedPassword,
+      password: hashedPassword
     });
     await emailService.sendWelcome(user);
     return user;
@@ -90,7 +83,6 @@ class AuthService {
 ```
 
 ##### 3. Middleware Pattern
-
 ```javascript
 // Authentication middleware
 export function withAuth(handler) {
@@ -107,7 +99,6 @@ export function withAuth(handler) {
 ## Design Patterns
 
 ### Authentication Flow
-
 ```
 User Registration:
 1. User submits form → Server Action
@@ -122,7 +113,6 @@ User Registration:
 ### Data Flow Patterns
 
 #### Read Operations
-
 ```
 Client Request → Server Component → Prisma Query → Database
                                  ↓
@@ -130,7 +120,6 @@ Client Request → Server Component → Prisma Query → Database
 ```
 
 #### Write Operations
-
 ```
 Form Submit → Server Action → Validation → Database Update
             ↓                           ↓
@@ -138,7 +127,6 @@ Form Submit → Server Action → Validation → Database Update
 ```
 
 ### Content Management Pattern
-
 ```
 MDX File → Gray Matter Parser → Metadata Extraction
         ↓                    ↓
@@ -150,7 +138,6 @@ MDX File → Gray Matter Parser → Metadata Extraction
 ## Code Organization Patterns
 
 ### Feature-Based Structure
-
 ```
 features/
 ├── auth/
@@ -168,7 +155,6 @@ features/
 ```
 
 ### Naming Conventions
-
 - **Files**: kebab-case for files (`user-profile.jsx`)
 - **Components**: PascalCase (`UserProfile`)
 - **Functions**: camelCase (`getUserById`)
@@ -176,7 +162,6 @@ features/
 - **CSS Classes**: kebab-case via Tailwind
 
 ### Import Organization
-
 ```javascript
 // 1. React/Next imports
 import { useState } from 'react';
@@ -201,7 +186,6 @@ import type { User } from '@/types';
 ## Error Handling Patterns
 
 ### Global Error Boundary
-
 ```javascript
 // app/error.js
 export default function Error({ error, reset }) {
@@ -215,7 +199,6 @@ export default function Error({ error, reset }) {
 ```
 
 ### API Error Responses
-
 ```javascript
 // Consistent error format
 {
@@ -231,11 +214,10 @@ export default function Error({ error, reset }) {
 ```
 
 ### Form Validation Pattern
-
 ```javascript
 const schema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(8)
 });
 
 async function handleSubmit(formData) {
@@ -250,13 +232,11 @@ async function handleSubmit(formData) {
 ## Security Patterns
 
 ### Input Sanitization
-
 - All user inputs validated with Zod schemas
 - SQL injection prevented by Prisma parameterized queries
 - XSS prevented by React's default escaping
 
 ### Authentication Security
-
 ```javascript
 // Password hashing
 const hashedPassword = await bcrypt.hash(password, 12);
@@ -271,22 +251,18 @@ if (!session) {
 ```
 
 ### Environment Variables
-
 ```javascript
 // Validation pattern
-const env = z
-  .object({
-    DATABASE_URL: z.string().url(),
-    NEXTAUTH_SECRET: z.string().min(32),
-    SMTP_HOST: z.string(),
-  })
-  .parse(process.env);
+const env = z.object({
+  DATABASE_URL: z.string().url(),
+  NEXTAUTH_SECRET: z.string().min(32),
+  SMTP_HOST: z.string()
+}).parse(process.env);
 ```
 
 ## Performance Patterns
 
 ### Caching Strategy
-
 ```javascript
 // Static generation for content
 export async function generateStaticParams() {
@@ -299,16 +275,15 @@ export const revalidate = 3600; // 1 hour
 ```
 
 ### Lazy Loading
-
 ```javascript
 // Dynamic imports for code splitting
-const HeavyComponent = dynamic(() => import('@/components/heavy-component'), {
-  loading: () => <Skeleton />,
-});
+const HeavyComponent = dynamic(
+  () => import('@/components/heavy-component'),
+  { loading: () => <Skeleton /> }
+);
 ```
 
 ### Database Optimization
-
 ```javascript
 // Efficient queries with Prisma
 const users = await prisma.user.findMany({
@@ -318,18 +293,17 @@ const users = await prisma.user.findMany({
     profile: {
       select: {
         name: true,
-        avatar: true,
-      },
-    },
+        avatar: true
+      }
+    }
   },
-  take: 10,
+  take: 10
 });
 ```
 
 ## Deployment Patterns
 
 ### Docker Multi-Stage Build
-
 ```dockerfile
 # Dependencies
 FROM node:18-alpine AS deps
@@ -352,7 +326,6 @@ CMD ["npm", "start"]
 ```
 
 ### Health Check Pattern
-
 ```javascript
 // app/api/health/route.js
 export async function GET() {
@@ -368,7 +341,6 @@ export async function GET() {
 ## Testing Patterns (Future Enhancement)
 
 ### Unit Testing Structure
-
 ```javascript
 describe('UserService', () => {
   it('should hash password on registration', async () => {
@@ -378,7 +350,6 @@ describe('UserService', () => {
 ```
 
 ### Integration Testing
-
 ```javascript
 describe('API Routes', () => {
   it('should require authentication', async () => {
@@ -391,20 +362,14 @@ describe('API Routes', () => {
 ## Monitoring Patterns
 
 ### Structured Logging
-
 ```javascript
 const logger = {
-  info: (message, meta) =>
-    console.log(JSON.stringify({ level: 'info', message, ...meta })),
-  error: (message, error) =>
-    console.error(
-      JSON.stringify({ level: 'error', message, error: error.stack })
-    ),
+  info: (message, meta) => console.log(JSON.stringify({ level: 'info', message, ...meta })),
+  error: (message, error) => console.error(JSON.stringify({ level: 'error', message, error: error.stack }))
 };
 ```
 
 ### Performance Monitoring
-
 ```javascript
 // API route timing
 export async function GET(req) {

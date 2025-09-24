@@ -10,7 +10,6 @@ author: Claude Code PM System
 ## Code Style
 
 ### General Principles
-
 - **Readability First**: Code should be self-documenting
 - **Consistency**: Follow established patterns throughout
 - **Simplicity**: Avoid clever tricks, prefer clarity
@@ -19,19 +18,19 @@ author: Claude Code PM System
 ### JavaScript Conventions
 
 #### Naming Conventions
-
 ```javascript
 // Files and folders: kebab-case
-user - profile.js;
-api - routes / auth - middleware.js;
+user-profile.js
+api-routes/
+auth-middleware.js
 
 // React Components: PascalCase file and export
-UserProfile.jsx;
+UserProfile.jsx
 export default function UserProfile() {}
 
 // Functions: camelCase
 function getUserById() {}
-const handleSubmit = () => {};
+const handleSubmit = () => {}
 
 // Constants: UPPER_SNAKE_CASE
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -42,14 +41,13 @@ const userName = 'John';
 let isAuthenticated = false;
 
 // Private functions/variables: leading underscore
-const _internalHelper = () => {};
+const _internalHelper = () => {}
 ```
 
 #### Function Style
-
 ```javascript
 // Prefer arrow functions for callbacks and handlers
-const handleClick = event => {
+const handleClick = (event) => {
   event.preventDefault();
   // logic
 };
@@ -72,7 +70,6 @@ const getName = user => user.name;
 ```
 
 #### Variable Declarations
-
 ```javascript
 // Use const by default
 const API_KEY = process.env.API_KEY;
@@ -90,7 +87,6 @@ const [first, ...rest] = items;
 ```
 
 #### Async/Await
-
 ```javascript
 // Always use async/await over promises
 async function getUser(id) {
@@ -104,13 +100,15 @@ async function getUser(id) {
 }
 
 // Parallel operations
-const [users, posts] = await Promise.all([getUsers(), getPosts()]);
+const [users, posts] = await Promise.all([
+  getUsers(),
+  getPosts()
+]);
 ```
 
 ### React/Next.js Patterns
 
 #### Component Structure
-
 ```javascript
 // 1. Imports
 import { useState, useEffect } from 'react';
@@ -136,7 +134,11 @@ export default function ComponentName({ props }) {
   };
 
   // 7. Render
-  return <div>{/* JSX */}</div>;
+  return (
+    <div>
+      {/* JSX */}
+    </div>
+  );
 }
 
 // 8. Sub-components (if any)
@@ -146,7 +148,6 @@ function SubComponent() {
 ```
 
 #### Server vs Client Components
-
 ```javascript
 // Server Component (default)
 // app/users/page.js
@@ -168,7 +169,6 @@ export default function InteractiveForm() {
 ```
 
 #### Props and State
-
 ```javascript
 // Props destructuring
 function UserCard({ name, email, avatar = '/default.png' }) {
@@ -190,7 +190,6 @@ const [error, setError] = useState(null);
 ### CSS/Styling Conventions
 
 #### Tailwind CSS Usage
-
 ```jsx
 // Use Tailwind utility classes
 <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow">
@@ -216,7 +215,6 @@ import { cn } from '@/lib/utils';
 ```
 
 #### Component Styling
-
 ```javascript
 // Prefer composition over custom CSS
 // ✅ Good
@@ -234,7 +232,6 @@ import { cn } from '@/lib/utils';
 ### File Organization
 
 #### Directory Structure
-
 ```
 app/
 ├── (auth)/              # Route groups
@@ -262,7 +259,6 @@ lib/
 ```
 
 #### Import Organization
-
 ```javascript
 // 1. React/Next.js imports
 import { useState } from 'react';
@@ -293,7 +289,6 @@ import styles from './component.module.css';
 ### Database/Prisma Conventions
 
 #### Schema Naming
-
 ```prisma
 // Models: PascalCase singular
 model User {
@@ -319,7 +314,6 @@ model Post {
 ```
 
 #### Query Patterns
-
 ```javascript
 // Use specific selects
 const user = await prisma.user.findUnique({
@@ -330,10 +324,10 @@ const user = await prisma.user.findUnique({
     profile: {
       select: {
         name: true,
-        avatar: true,
-      },
-    },
-  },
+        avatar: true
+      }
+    }
+  }
 });
 
 // Include relations when needed
@@ -343,16 +337,15 @@ const userWithPosts = await prisma.user.findUnique({
     posts: {
       where: { isPublished: true },
       orderBy: { createdAt: 'desc' },
-      take: 10,
-    },
-  },
+      take: 10
+    }
+  }
 });
 ```
 
 ### API Conventions
 
 #### Route Naming
-
 ```
 GET    /api/users       # List users
 GET    /api/users/[id]  # Get single user
@@ -362,28 +355,21 @@ DELETE /api/users/[id]  # Delete user
 ```
 
 #### Response Format
-
 ```javascript
 // Success response
-return Response.json(
-  {
-    data: userData,
-    message: 'User created successfully',
-  },
-  { status: 200 }
-);
+return Response.json({
+  data: userData,
+  message: 'User created successfully'
+}, { status: 200 });
 
 // Error response
-return Response.json(
-  {
-    error: {
-      code: 'VALIDATION_ERROR',
-      message: 'Invalid email format',
-      field: 'email',
-    },
-  },
-  { status: 400 }
-);
+return Response.json({
+  error: {
+    code: 'VALIDATION_ERROR',
+    message: 'Invalid email format',
+    field: 'email'
+  }
+}, { status: 400 });
 
 // List response with pagination
 return Response.json({
@@ -392,15 +378,14 @@ return Response.json({
     page: 1,
     limit: 10,
     total: 100,
-    pages: 10,
-  },
+    pages: 10
+  }
 });
 ```
 
 ### Error Handling
 
 #### Try-Catch Pattern
-
 ```javascript
 async function riskyOperation() {
   try {
@@ -410,25 +395,24 @@ async function riskyOperation() {
     console.error('Operation failed:', error);
     return {
       success: false,
-      error: error.message || 'Unknown error occurred',
+      error: error.message || 'Unknown error occurred'
     };
   }
 }
 ```
 
 #### Form Validation
-
 ```javascript
 const schema = z.object({
   email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  password: z.string().min(8, 'Password must be at least 8 characters')
 });
 
 function validateInput(data) {
   const result = schema.safeParse(data);
   if (!result.success) {
     return {
-      errors: result.error.flatten().fieldErrors,
+      errors: result.error.flatten().fieldErrors
     };
   }
   return { data: result.data };
@@ -438,7 +422,6 @@ function validateInput(data) {
 ### Comments and Documentation
 
 #### Code Comments
-
 ```javascript
 // Use comments sparingly, prefer self-documenting code
 
@@ -456,7 +439,6 @@ const userName = 'John';
 ```
 
 #### JSDoc for Utilities
-
 ```javascript
 /**
  * Hashes a password using bcrypt
@@ -471,7 +453,6 @@ async function hashPassword(password) {
 ### Git Commit Conventions
 
 #### Commit Message Format
-
 ```
 type: brief description
 
@@ -481,7 +462,6 @@ Fixes #123
 ```
 
 #### Commit Types
-
 - `feat:` New feature
 - `fix:` Bug fix
 - `docs:` Documentation only
@@ -491,7 +471,6 @@ Fixes #123
 - `chore:` Maintenance tasks
 
 #### Examples
-
 ```
 feat: add user authentication with NextAuth
 
@@ -510,7 +489,6 @@ chore: update dependencies to latest versions
 ### Testing Conventions (Future)
 
 #### Test File Naming
-
 ```
 component.test.js      # Unit tests
 component.spec.js      # Integration tests
@@ -518,7 +496,6 @@ component.e2e.js       # End-to-end tests
 ```
 
 #### Test Structure
-
 ```javascript
 describe('UserProfile', () => {
   it('should display user name', () => {
@@ -537,28 +514,24 @@ describe('UserProfile', () => {
 ## Quality Standards
 
 ### Performance
-
 - Lazy load components when appropriate
 - Use Next.js Image for optimized images
 - Implement proper caching strategies
 - Minimize bundle size
 
 ### Accessibility
-
 - Use semantic HTML
 - Include proper ARIA labels
 - Ensure keyboard navigation
 - Test with screen readers
 
 ### Security
-
 - Validate all inputs
 - Sanitize user content
 - Use environment variables for secrets
 - Implement proper authentication
 
 ### Code Review Checklist
-
 - [ ] Code follows style guide
 - [ ] No console.logs in production code
 - [ ] Error handling implemented

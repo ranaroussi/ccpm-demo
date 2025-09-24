@@ -45,10 +45,7 @@
       "Bash(mkdir:*)",
       "Bash(for:*)",
       "Bash(do [ -f \"$f\" ])",
-      "Bash(done)",
-      "Bash(chmod:*)",
-      "Bash(docker build:*)",
-      "Bash(do)"
+      "Bash(done)"
     ]
   }
 }

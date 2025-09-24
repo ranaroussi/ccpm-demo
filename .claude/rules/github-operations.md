@@ -31,7 +31,6 @@ fi
 ```
 
 This check MUST be performed in ALL commands that:
-
 - Create issues (`gh issue create`)
 - Edit issues (`gh issue edit`)
 - Comment on issues (`gh issue comment`)
@@ -49,13 +48,11 @@ gh {command} || echo "❌ GitHub CLI failed. Run: gh auth login"
 ## Common Operations
 
 ### Get Issue Details
-
 ```bash
 gh issue view {number} --json state,title,labels,body
 ```
 
 ### Create Issue
-
 ```bash
 # Always specify repo to avoid defaulting to wrong repository
 REPO=$(git remote get-url origin | sed 's/.*github.com[:/]\(.*\)\.git/\1/')
@@ -63,14 +60,12 @@ gh issue create --repo "$REPO" --title "{title}" --body-file {file} --label "{la
 ```
 
 ### Update Issue
-
 ```bash
 # ALWAYS check remote origin first!
 gh issue edit {number} --add-label "{label}" --add-assignee @me
 ```
 
 ### Add Comment
-
 ```bash
 # ALWAYS check remote origin first!
 gh issue comment {number} --body-file {file}
@@ -79,7 +74,6 @@ gh issue comment {number} --body-file {file}
 ## Error Handling
 
 If any gh command fails:
-
 1. Show clear error: "❌ GitHub operation failed: {command}"
 2. Suggest fix: "Run: gh auth login" or check issue number
 3. Don't retry automatically

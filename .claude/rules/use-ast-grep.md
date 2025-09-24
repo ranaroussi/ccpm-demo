@@ -13,7 +13,6 @@ Use `ast-grep` (if installed) instead of plain regex or text search when:
 ## AST-Grep Command Patterns
 
 ### Basic Search Template:
-
 ```sh
 ast-grep --pattern '$PATTERN' --lang $LANGUAGE $PATH
 ```
@@ -47,7 +46,6 @@ ast-grep --pattern '$PATTERN' --lang $LANGUAGE $PATH
 **Complete list of ast-grep supported languages** (25 total):
 
 **System Programming:**
-
 - **C**: `c`
 - **C++**: `cpp`
 - **C#**: `csharp`
@@ -55,7 +53,6 @@ ast-grep --pattern '$PATTERN' --lang $LANGUAGE $PATH
 - **Rust**: `rust`
 
 **Web Development:**
-
 - **JavaScript**: `javascript` (aliases: `js`, `jsx`)
 - **TypeScript**: `typescript` (aliases: `ts`)
 - **TSX**: `tsx`
@@ -64,7 +61,6 @@ ast-grep --pattern '$PATTERN' --lang $LANGUAGE $PATH
 - **PHP**: `php`
 
 **General Purpose:**
-
 - **Python**: `python`
 - **Java**: `java`
 - **Kotlin**: `kotlin`
@@ -76,12 +72,10 @@ ast-grep --pattern '$PATTERN' --lang $LANGUAGE $PATH
 - **Haskell**: `haskell`
 
 **Configuration & Data:**
-
 - **JSON**: `json`
 - **YAML**: `yaml`
 
 **Other:**
-
 - **Bash**: `bash`
 - **Nix**: `nix`
 - **Solidity**: `solidity`
@@ -91,7 +85,6 @@ ast-grep --pattern '$PATTERN' --lang $LANGUAGE $PATH
 ## Integration Workflow
 
 ### Before using ast-grep:
-
 1. **Check if ast-grep is installed:**
    If not, skip and fall back to regex/semantic search.
    ```sh
@@ -122,7 +115,6 @@ When asked to "find all Ruby service objects that call `perform`":
 - **edit_file** for making precise, context-aware code changes
 
 ### Advanced Usage
-
 - **JSON output for programmatic processing:**
   `ast-grep --pattern '$PATTERN' --lang $LANG $PATH --json`
 - **Replace patterns:**
@@ -140,12 +132,12 @@ When asked to "find all Ruby service objects that call `perform`":
 
 ## Decision Matrix: When to Use Each Tool
 
-| Task Type              | Tool Choice          | Reason                |
-| ---------------------- | -------------------- | --------------------- |
-| Find text patterns     | grep_search          | Simple text matching  |
-| Find code structures   | ast-grep             | Syntax-aware search   |
-| Understand semantics   | codebase_search      | AI-powered context    |
-| Make edits             | edit_file            | Precise file editing  |
-| Structural refactoring | ast-grep + edit_file | Structure + precision |
+| Task Type                | Tool Choice          | Reason                        |
+|--------------------------|----------------------|-------------------------------|
+| Find text patterns       | grep_search          | Simple text matching          |
+| Find code structures     | ast-grep             | Syntax-aware search           |
+| Understand semantics     | codebase_search      | AI-powered context            |
+| Make edits               | edit_file            | Precise file editing          |
+| Structural refactoring   | ast-grep + edit_file | Structure + precision         |
 
 **Always prefer ast-grep for code structure analysis over regex-based approaches, but only if it is installed and available.**
