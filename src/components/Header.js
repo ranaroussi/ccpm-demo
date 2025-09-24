@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import Button from './ui/Button';
+import { Button } from '@/components/ui/button';
+import { ThemeToggle } from './theme-toggle';
 
 export default function Header() {
   return (
@@ -16,6 +17,12 @@ export default function Header() {
             Home
           </Link>
           <Link
+            href="/components"
+            className="hover:text-primary text-sm font-medium"
+          >
+            Components
+          </Link>
+          <Link
             href="/features"
             className="hover:text-primary text-sm font-medium"
           >
@@ -30,6 +37,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center space-x-4">
+          <ThemeToggle />
           <Button variant="ghost" size="sm">
             Log in
           </Button>
