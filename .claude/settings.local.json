@@ -45,7 +45,8 @@
       "Bash(mkdir:*)",
       "Bash(for:*)",
       "Bash(do [ -f \"$f\" ])",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(chmod:*)"
     ]
   }
 }

@@ -7,7 +7,6 @@ allowed-tools: Bash, Read, Write, LS, Task
 Launch parallel agents to work on epic tasks in a shared worktree.
 
 ## Usage
-
 ```
 /pm:epic-start <epic_name>
 ```
@@ -15,7 +14,6 @@ Launch parallel agents to work on epic tasks in a shared worktree.
 ## Quick Check
 
 1. **Verify epic exists:**
-
    ```bash
    test -f .claude/epics/$ARGUMENTS/epic.md || echo "❌ Epic not found. Run: /pm:prd-parse $ARGUMENTS"
    ```
@@ -50,13 +48,11 @@ fi
 ### 2. Identify Ready Issues
 
 Read all task files in `.claude/epics/$ARGUMENTS/`:
-
 - Parse frontmatter for `status`, `depends_on`, `parallel` fields
 - Check GitHub issue status if needed
 - Build dependency graph
 
 Categorize issues:
-
 - **Ready**: No unmet dependencies, not started
 - **Blocked**: Has unmet dependencies
 - **In Progress**: Already being worked on
@@ -65,7 +61,6 @@ Categorize issues:
 ### 3. Analyze Ready Issues
 
 For each ready issue without analysis:
-
 ```bash
 # Check for analysis
 if ! test -f .claude/epics/$ARGUMENTS/{issue}-analysis.md; then
@@ -83,19 +78,17 @@ For each ready issue with analysis:
 
 Reading analysis...
 Found {count} parallel streams:
-
-- Stream A: {description} (Agent-{id})
-- Stream B: {description} (Agent-{id})
+  - Stream A: {description} (Agent-{id})
+  - Stream B: {description} (Agent-{id})
 
 Launching agents in worktree: ../epic-$ARGUMENTS/
 ```
 
 Use Task tool to launch each stream:
-
 ```yaml
 Task:
-  description: 'Issue #{issue} Stream {X}'
-  subagent_type: '{agent_type}'
+  description: "Issue #{issue} Stream {X}"
+  subagent_type: "{agent_type}"
   prompt: |
     Working in worktree: ../epic-$ARGUMENTS/
     Issue: #{issue} - {title}
@@ -124,7 +117,7 @@ Create/update `.claude/epics/$ARGUMENTS/execution-status.md`:
 
 ```markdown
 ---
-started: { datetime }
+started: {datetime}
 worktree: ../epic-$ARGUMENTS
 branch: epic/$ARGUMENTS
 ---
@@ -132,25 +125,21 @@ branch: epic/$ARGUMENTS
 # Execution Status
 
 ## Active Agents
-
 - Agent-1: Issue #1234 Stream A (Database) - Started {time}
 - Agent-2: Issue #1234 Stream B (API) - Started {time}
 - Agent-3: Issue #1235 Stream A (UI) - Started {time}
 
 ## Queued Issues
-
 - Issue #1236 - Waiting for #1234
 - Issue #1237 - Waiting for #1235
 
 ## Completed
-
 - {None yet}
 ```
 
 ### 6. Monitor and Coordinate
 
 Set up monitoring:
-
 ```bash
 echo "
 Agents launched successfully!
@@ -172,7 +161,6 @@ Merge when complete:
 ### 7. Handle Dependencies
 
 As agents complete streams:
-
 - Check if any blocked issues are now ready
 - Launch new agents for newly-ready work
 - Update execution-status.md
@@ -206,7 +194,6 @@ Monitor with: /pm:epic-status $ARGUMENTS
 ## Error Handling
 
 If agent launch fails:
-
 ```
 ❌ Failed to start Agent-{id}
   Issue: #{issue}
@@ -217,7 +204,6 @@ Continue with other agents? (yes/no)
 ```
 
 If worktree creation fails:
-
 ```
 ❌ Cannot create worktree
   {git error message}

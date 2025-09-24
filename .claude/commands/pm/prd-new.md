@@ -7,7 +7,6 @@ allowed-tools: Bash, Read, Write, LS
 Launch brainstorming for new product requirement document.
 
 ## Usage
-
 ```
 /pm:prd-new <feature_name>
 ```
@@ -15,7 +14,6 @@ Launch brainstorming for new product requirement document.
 ## Required Rules
 
 **IMPORTANT:** Before executing this command, read and follow:
-
 - `.claude/rules/datetime.md` - For getting real current date/time
 
 ## Preflight Checklist
@@ -24,7 +22,6 @@ Before proceeding, complete these validation steps.
 Do not bother the user with preflight checks progress ("I'm not going to ..."). Just do them and move on.
 
 ### Input Validation
-
 1. **Validate feature name format:**
    - Must contain only lowercase letters, numbers, and hyphens
    - Must start with a letter
@@ -49,66 +46,53 @@ You are a product manager creating a comprehensive Product Requirements Document
 Follow this structured approach:
 
 ### 1. Discovery & Context
-
 - Ask clarifying questions about the feature/product "$ARGUMENTS"
 - Understand the problem being solved
 - Identify target users and use cases
 - Gather constraints and requirements
 
 ### 2. PRD Structure
-
 Create a comprehensive PRD with these sections:
 
 #### Executive Summary
-
 - Brief overview and value proposition
 
 #### Problem Statement
-
 - What problem are we solving?
 - Why is this important now?
 
 #### User Stories
-
 - Primary user personas
 - Detailed user journeys
 - Pain points being addressed
 
 #### Requirements
-
 **Functional Requirements**
-
 - Core features and capabilities
 - User interactions and flows
 
 **Non-Functional Requirements**
-
 - Performance expectations
 - Security considerations
 - Scalability needs
 
 #### Success Criteria
-
 - Measurable outcomes
 - Key metrics and KPIs
 
 #### Constraints & Assumptions
-
 - Technical limitations
 - Timeline constraints
 - Resource limitations
 
 #### Out of Scope
-
 - What we're explicitly NOT building
 
 #### Dependencies
-
 - External dependencies
 - Internal team dependencies
 
 ### 3. File Format with Frontmatter
-
 Save the completed PRD to: `.claude/prds/$ARGUMENTS.md` with this exact structure:
 
 ```markdown
@@ -122,18 +106,15 @@ created: [Current ISO date/time]
 # PRD: $ARGUMENTS
 
 ## Executive Summary
-
 [Content...]
 
 ## Problem Statement
-
 [Content...]
 
 [Continue with all sections...]
 ```
 
 ### 4. Frontmatter Guidelines
-
 - **name**: Use the exact feature name (same as $ARGUMENTS)
 - **description**: Write a concise one-line summary of what this PRD covers
 - **status**: Always start with "backlog" for new PRDs
@@ -144,7 +125,6 @@ created: [Current ISO date/time]
 ### 5. Quality Checks
 
 Before saving the PRD, verify:
-
 - [ ] All sections are complete (no placeholder text)
 - [ ] User stories include acceptance criteria
 - [ ] Success criteria are measurable
@@ -154,7 +134,6 @@ Before saving the PRD, verify:
 ### 6. Post-Creation
 
 After successfully creating the PRD:
-
 1. Confirm: "✅ PRD created: .claude/prds/$ARGUMENTS.md"
 2. Show brief summary of what was captured
 3. Suggest next step: "Ready to create implementation epic? Run: /pm:prd-parse $ARGUMENTS"
@@ -162,7 +141,6 @@ After successfully creating the PRD:
 ## Error Recovery
 
 If any step fails:
-
 - Clearly explain what went wrong
 - Provide specific steps to fix the issue
 - Never leave partial or corrupted files

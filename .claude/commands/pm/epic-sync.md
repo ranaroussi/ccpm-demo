@@ -7,7 +7,6 @@ allowed-tools: Bash, Read, Write, LS, Task
 Push epic and tasks to GitHub as issues.
 
 ## Usage
-
 ```
 /pm:epic-sync <feature_name>
 ```
@@ -57,15 +56,15 @@ fi
 ### 1. Create Epic Issue
 
 #### First, detect the GitHub repository:
-
 ```bash
 # Get the current repository from git remote
-REPO=$(git remote get-url origin | sed 's/.*github.com[:/]\(.*\)\.git/\1/' || echo "user/repo")
+remote_url=$(git remote get-url origin 2>/dev/null || echo "")
+REPO=$(echo "$remote_url" | sed 's|.*github.com[:/]||' | sed 's|\.git$||')
+[ -z "$REPO" ] && REPO="user/repo"
 echo "Creating issues in repository: $REPO"
 ```
 
 Strip frontmatter and prepare GitHub issue body:
-
 ```bash
 # Extract content without frontmatter
 sed '1,/^---$/d; 1,/^---$/d' .claude/epics/$ARGUMENTS/epic.md > /tmp/epic-body-raw.md
@@ -130,7 +129,6 @@ Store the returned issue number for epic frontmatter update.
 ### 2. Create Task Sub-Issues
 
 Check if gh-sub-issue is available:
-
 ```bash
 if gh extension list | grep -q "yahsan2/gh-sub-issue"; then
   use_subissues=true
@@ -141,7 +139,6 @@ fi
 ```
 
 Count task files to determine strategy:
-
 ```bash
 task_count=$(ls .claude/epics/$ARGUMENTS/[0-9][0-9][0-9].md 2>/dev/null | wc -l)
 ```
@@ -206,11 +203,10 @@ fi
 ```
 
 Use Task tool for parallel creation:
-
 ```yaml
 Task:
-  description: 'Create GitHub sub-issues batch {X}'
-  subagent_type: 'general-purpose'
+  description: "Create GitHub sub-issues batch {X}"
+  subagent_type: "general-purpose"
   prompt: |
     Create GitHub sub-issues for tasks in epic $ARGUMENTS
     Parent epic issue: #$epic_number
@@ -236,7 +232,6 @@ Task:
 ```
 
 Consolidate results from parallel agents:
-
 ```bash
 # Collect all mappings from agents
 cat /tmp/batch-*/mapping.txt >> /tmp/task-mapping.txt
@@ -250,7 +245,6 @@ cat /tmp/batch-*/mapping.txt >> /tmp/task-mapping.txt
 ### 3. Rename Task Files and Update References
 
 First, build a mapping of old numbers to new issue IDs:
-
 ```bash
 # Create mapping from old task numbers (001, 002, etc.) to new issue IDs
 > /tmp/id-mapping.txt
@@ -262,7 +256,6 @@ done < /tmp/task-mapping.txt
 ```
 
 Then rename files and update all references:
-
 ```bash
 # Process each task file
 while IFS=: read -r task_file task_number; do
@@ -305,19 +298,19 @@ If NOT using gh-sub-issue, add task list to epic:
 ```bash
 if [ "$use_subissues" = false ]; then
   # Get current epic body
-  gh issue view {epic_number} --json body -q .body > /tmp/epic-body.md
+  gh issue view ${epic_number} --json body -q .body > /tmp/epic-body.md
 
   # Append task list
   cat >> /tmp/epic-body.md << 'EOF'
 
   ## Tasks
-  - [ ] #{task1_number} {task1_name}
-  - [ ] #{task2_number} {task2_name}
-  - [ ] #{task3_number} {task3_name}
+  - [ ] #${task1_number} ${task1_name}
+  - [ ] #${task2_number} ${task2_name}
+  - [ ] #${task3_number} ${task3_name}
   EOF
 
   # Update epic issue
-  gh issue edit {epic_number} --body-file /tmp/epic-body.md
+  gh issue edit ${epic_number} --body-file /tmp/epic-body.md
 fi
 ```
 
@@ -328,7 +321,6 @@ With gh-sub-issue, this is automatic!
 Update the epic file with GitHub URL, timestamp, and real task IDs:
 
 #### 5a. Update Frontmatter
-
 ```bash
 # Get repo info
 repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
@@ -342,7 +334,6 @@ rm .claude/epics/$ARGUMENTS/epic.md.bak
 ```
 
 #### 5b. Update Tasks Created Section
-
 ```bash
 # Create a temporary file with the updated Tasks Created section
 cat > /tmp/tasks-section.md << 'EOF'
@@ -401,7 +392,6 @@ rm /tmp/tasks-section.md
 ### 6. Create Mapping File
 
 Create `.claude/epics/$ARGUMENTS/github-mapping.md`:
-
 ```bash
 # Create mapping file
 cat > .claude/epics/$ARGUMENTS/github-mapping.md << EOF
@@ -464,7 +454,6 @@ Next steps:
 Follow `/rules/github-operations.md` for GitHub CLI errors.
 
 If any issue creation fails:
-
 - Report what succeeded
 - Note what failed
 - Don't attempt rollback (partial sync is fine)

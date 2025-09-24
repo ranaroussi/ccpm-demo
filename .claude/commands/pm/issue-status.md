@@ -7,7 +7,6 @@ allowed-tools: Bash, Read, LS
 Check issue status (open/closed) and current state.
 
 ## Usage
-
 ```
 /pm:issue-status <issue_number>
 ```
@@ -17,31 +16,25 @@ Check issue status (open/closed) and current state.
 You are checking the current status of a GitHub issue and providing a quick status report for: **Issue #$ARGUMENTS**
 
 ### 1. Fetch Issue Status
-
 Use GitHub CLI to get current status:
-
 ```bash
 gh issue view #$ARGUMENTS --json state,title,labels,assignees,updatedAt
 ```
 
 ### 2. Status Display
-
 Show concise status information:
-
 ```
 🎫 Issue #$ARGUMENTS: {Title}
-
+   
 📊 Status: {OPEN/CLOSED}
    Last update: {timestamp}
    Assignee: {assignee or "Unassigned"}
-
+   
 🏷️ Labels: {label1}, {label2}, {label3}
 ```
 
 ### 3. Epic Context
-
 If issue is part of an epic:
-
 ```
 📚 Epic Context:
    Epic: {epic_name}
@@ -50,9 +43,7 @@ If issue is part of an epic:
 ```
 
 ### 4. Local Sync Status
-
 Check if local files are in sync:
-
 ```
 💾 Local Sync:
    Local file: {exists/missing}
@@ -61,19 +52,15 @@ Check if local files are in sync:
 ```
 
 ### 5. Quick Status Indicators
-
 Use clear visual indicators:
-
 - 🟢 Open and ready
-- 🟡 Open with blockers
+- 🟡 Open with blockers  
 - 🔴 Open and overdue
 - ✅ Closed and complete
 - ❌ Closed without completion
 
 ### 6. Actionable Next Steps
-
 Based on status, suggest actions:
-
 ```
 🚀 Suggested Actions:
    - Start work: /pm:issue-start $ARGUMENTS
@@ -83,9 +70,7 @@ Based on status, suggest actions:
 ```
 
 ### 7. Batch Status
-
 If checking multiple issues, support comma-separated list:
-
 ```
 /pm:issue-status 123,124,125
 ```
