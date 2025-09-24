@@ -1,11 +1,11 @@
 ---
 name: base-nextjs-app
-status: backlog
+status: in-progress
 created: 2025-09-24T18:42:10Z
-progress: 0%
+progress: 50%
 prd: .claude/prds/base-nextjs-app.md
 github: https://github.com/ranaroussi/ccpm-demo/issues/1
-updated: 2025-09-24T19:02:26Z
+updated: 2025-09-24T20:31:19Z
 ---
 
 # Epic: base-nextjs-app
