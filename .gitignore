@@ -1,2 +1,3 @@
 .claude/epics
 .claude/commands/.DS_Store
+node_modules/
