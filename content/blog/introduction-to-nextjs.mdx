@@ -1,0 +1,209 @@
+---
+title: Introduction to Next.js 15
+description: Explore the new features and improvements in Next.js 15, including App Router enhancements and performance optimizations.
+date: 2025-01-10
+author: Development Team
+tags: [nextjs, react, web-development, tutorial]
+published: true
+image: /images/blog/nextjs-15.jpg
+---
+
+# Introduction to Next.js 15
+
+Next.js 15 brings exciting new features and improvements that make building web applications even more efficient and enjoyable. Let's explore what's new!
+
+## Key Features in Next.js 15
+
+### Enhanced App Router
+
+The App Router continues to evolve with better performance and developer experience:
+
+```javascript
+// app/layout.js - Root layout with improved streaming
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Suspense fallback={<LoadingSpinner />}>
+          {children}
+        </Suspense>
+      </body>
+    </html>
+  );
+}
+```
+
+### Server Components Improvements
+
+Server Components now offer better hydration and reduced client-side JavaScript:
+
+```jsx
+// app/dashboard/page.jsx
+import { fetchUserData } from '@/lib/api';
+
+export default async function Dashboard() {
+  const user = await fetchUserData();
+
+  return (
+    <div>
+      <h1>Welcome, {user.name}!</h1>
+      <UserStats data={user.stats} />
+    </div>
+  );
+}
+```
+
+## Performance Enhancements
+
+### Turbopack Integration
+
+Turbopack provides lightning-fast development builds:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack"
+  }
+}
+```
+
+### Image Optimization
+
+Enhanced image optimization with better format detection:
+
+```jsx
+import Image from 'next/image';
+
+export function OptimizedImage({ src, alt }) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={800}
+      height={400}
+      priority
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,..."
+    />
+  );
+}
+```
+
+## Developer Experience
+
+### Improved Error Handling
+
+Better error boundaries and debugging tools:
+
+```jsx
+// app/error.jsx
+'use client';
+
+export default function Error({ error, reset }) {
+  return (
+    <div>
+      <h2>Something went wrong!</h2>
+      <button onClick={() => reset()}>Try again</button>
+    </div>
+  );
+}
+```
+
+### TypeScript Enhancements
+
+Better type inference and autocomplete:
+
+```typescript
+// types/app.ts
+interface PageProps<T = {}> {
+  params: T;
+  searchParams: Record<string, string | string[]>;
+}
+
+export default function Page({ params, searchParams }: PageProps<{ slug: string }>) {
+  // TypeScript now infers the correct types
+  return <div>Post: {params.slug}</div>;
+}
+```
+
+## Migration Guide
+
+### From Pages Router
+
+If you're migrating from the Pages Router:
+
+1. **Move files to the `app` directory**
+2. **Update imports and exports**
+3. **Adapt to new routing conventions**
+
+```javascript
+// Before (pages/api/users.js)
+export default function handler(req, res) {
+  res.json({ users: [] });
+}
+
+// After (app/api/users/route.js)
+export async function GET() {
+  return Response.json({ users: [] });
+}
+```
+
+### Update Configuration
+
+Update your `next.config.js`:
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    turbopack: true,
+  },
+};
+
+export default nextConfig;
+```
+
+## Best Practices
+
+### Data Fetching
+
+Use the new data fetching patterns:
+
+```jsx
+// Server Component
+export default async function Posts() {
+  const posts = await fetch('/api/posts').then(res => res.json());
+
+  return (
+    <div>
+      {posts.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+}
+
+// Client Component for interactivity
+'use client';
+import { useState, useEffect } from 'react';
+
+export function InteractivePosts() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/posts')
+      .then(res => res.json())
+      .then(setPosts);
+  }, []);
+
+  return <PostList posts={posts} />;
+}
+```
+
+## Conclusion
+
+Next.js 15 continues to push the boundaries of what's possible in web development. With improved performance, better developer experience, and powerful new features, it's an excellent choice for your next project.
+
+Ready to get started? Check out our [project setup guide](/docs/setup) or explore more [advanced patterns](/docs/patterns).

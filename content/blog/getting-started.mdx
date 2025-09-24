@@ -1,0 +1,126 @@
+---
+title: Getting Started with Our Platform
+description: A comprehensive guide to get you up and running with our platform in minutes.
+date: 2025-01-15
+author: Platform Team
+tags: [guide, tutorial, getting-started]
+published: true
+image: /images/blog/getting-started.jpg
+---
+
+# Getting Started with Our Platform
+
+Welcome to our platform! This guide will help you get up and running quickly with all the essential features you need to know.
+
+## What You'll Learn
+
+In this tutorial, we'll cover:
+
+- Setting up your account
+- Creating your first project
+- Understanding the dashboard
+- Basic configuration options
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A valid email address
+- Basic understanding of web development
+- 15 minutes of your time
+
+## Step 1: Account Setup
+
+Creating an account is straightforward. Simply navigate to the signup page and provide the required information:
+
+```javascript
+// Example API call for account creation
+const createAccount = async (userData) => {
+  try {
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error('Account creation failed:', error);
+  }
+};
+```
+
+## Step 2: Dashboard Overview
+
+Once logged in, you'll see the main dashboard with several key sections:
+
+### Navigation Menu
+The sidebar contains links to all major features:
+- **Projects**: Manage your projects
+- **Settings**: Configure your account
+- **Billing**: Handle subscriptions
+- **Support**: Get help when needed
+
+### Quick Actions
+Use the quick action buttons to:
+1. Create a new project
+2. Import existing data
+3. View recent activity
+4. Access documentation
+
+## Step 3: Creating Your First Project
+
+Let's create your first project:
+
+```bash
+# Using our CLI tool
+npm install -g platform-cli
+platform create my-first-project
+
+# Or use the web interface
+# Navigate to Projects → New Project
+```
+
+## Advanced Configuration
+
+For power users, here are some advanced configuration options:
+
+```json
+{
+  "project": {
+    "name": "my-project",
+    "environment": "production",
+    "features": {
+      "analytics": true,
+      "monitoring": true,
+      "backup": {
+        "enabled": true,
+        "frequency": "daily"
+      }
+    }
+  }
+}
+```
+
+## What's Next?
+
+Now that you have the basics down, here are some recommended next steps:
+
+- Explore our [API documentation](/docs/api)
+- Learn about [best practices](/docs/best-practices)
+- Join our [community forum](https://community.example.com)
+- Follow our [blog](/blog) for updates
+
+## Need Help?
+
+If you run into any issues:
+
+- Check our [FAQ](/docs/faq)
+- Contact support at support@example.com
+- Join our Discord community
+
+Happy building! 🚀

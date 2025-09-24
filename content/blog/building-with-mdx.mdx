@@ -1,0 +1,294 @@
+---
+title: Building Content-Rich Sites with MDX
+description: Learn how to create engaging content using MDX, combining the power of Markdown with React components.
+date: 2025-01-05
+author: Content Team
+tags: [mdx, content, documentation, blogging]
+published: true
+---
+
+# Building Content-Rich Sites with MDX
+
+MDX is a powerful format that combines Markdown with JSX, allowing you to create rich, interactive content. This post explores how to leverage MDX for documentation and blogging.
+
+## What is MDX?
+
+MDX lets you write JSX embedded inside Markdown. This means you can:
+
+- Use React components in your content
+- Create interactive elements
+- Maintain readable, structured content
+- Leverage the ecosystem of Markdown plugins
+
+## Basic MDX Syntax
+
+Here's how you can mix Markdown and React:
+
+```mdx
+# My Post Title
+
+This is regular **Markdown** content.
+
+<CustomComponent prop="value">
+  And this is a React component!
+</CustomComponent>
+
+Back to Markdown again.
+```
+
+## Creating Custom Components
+
+You can create reusable components for your content:
+
+```jsx
+// components/mdx/CodeBlock.jsx
+export function CodeBlock({ children, language, title }) {
+  return (
+    <div className="code-block">
+      {title && <div className="code-title">{title}</div>}
+      <pre className={`language-${language}`}>
+        <code>{children}</code>
+      </pre>
+    </div>
+  );
+}
+```
+
+Then use it in your MDX:
+
+```mdx
+<CodeBlock language="javascript" title="Example Function">
+{`
+function greet(name) {
+  return \`Hello, \${name}!\`;
+}
+`}
+</CodeBlock>
+```
+
+## Advanced Features
+
+### Interactive Elements
+
+Create engaging content with interactive components:
+
+```jsx
+// components/mdx/Counter.jsx
+'use client';
+import { useState } from 'react';
+
+export function Counter({ initial = 0 }) {
+  const [count, setCount] = useState(initial);
+
+  return (
+    <div className="counter">
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+Use in MDX:
+
+```mdx
+Try this interactive counter:
+
+<Counter initial={5} />
+```
+
+### Callout Components
+
+Create attention-grabbing callouts:
+
+```jsx
+// components/mdx/Callout.jsx
+export function Callout({ type = 'info', children }) {
+  const styles = {
+    info: 'border-blue-200 bg-blue-50 text-blue-800',
+    warning: 'border-yellow-200 bg-yellow-50 text-yellow-800',
+    error: 'border-red-200 bg-red-50 text-red-800',
+  };
+
+  return (
+    <div className={`border-l-4 p-4 ${styles[type]}`}>
+      {children}
+    </div>
+  );
+}
+```
+
+Usage:
+
+```mdx
+<Callout type="warning">
+  **Important**: Always validate user input before processing.
+</Callout>
+
+<Callout type="info">
+  This is a helpful tip for your readers.
+</Callout>
+```
+
+## Configuration
+
+### Next.js Setup
+
+Configure Next.js for MDX support:
+
+```javascript
+// next.config.mjs
+import createMDX from '@next/mdx';
+
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+export default withMDX({
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+});
+```
+
+### Plugin Ecosystem
+
+Enhance MDX with plugins:
+
+```javascript
+import remarkGfm from 'remark-gfm';
+import remarkToc from 'remark-toc';
+import rehypeSlug from 'rehype-slug';
+import rehypePrettyCode from 'rehype-pretty-code';
+
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [remarkGfm, remarkToc],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypePrettyCode, { theme: 'github-dark' }],
+    ],
+  },
+});
+```
+
+## Content Organization
+
+### File Structure
+
+Organize your content logically:
+
+```
+content/
+├── blog/
+│   ├── getting-started.mdx
+│   ├── advanced-topics.mdx
+│   └── tutorials/
+│       └── first-steps.mdx
+└── docs/
+    ├── introduction.mdx
+    ├── api/
+    │   ├── authentication.mdx
+    │   └── endpoints.mdx
+    └── guides/
+        └── deployment.mdx
+```
+
+### Frontmatter
+
+Use frontmatter for metadata:
+
+```yaml
+---
+title: Building with MDX
+description: A comprehensive guide to MDX
+date: 2025-01-05
+tags: [mdx, content, react]
+author: Content Team
+published: true
+---
+```
+
+## Best Practices
+
+### Component Guidelines
+
+1. **Keep components simple and focused**
+2. **Make them reusable across content**
+3. **Provide clear prop interfaces**
+4. **Handle edge cases gracefully**
+
+```jsx
+// Good: Simple, focused component
+export function ImageWithCaption({ src, alt, caption }) {
+  return (
+    <figure>
+      <img src={src} alt={alt} />
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  );
+}
+```
+
+### Performance Considerations
+
+- Use dynamic imports for heavy components
+- Optimize images with Next.js Image component
+- Minimize client-side JavaScript in content
+
+```jsx
+// Dynamic import for heavy components
+import dynamic from 'next/dynamic';
+
+const HeavyChart = dynamic(() => import('./HeavyChart'), {
+  ssr: false,
+  loading: () => <p>Loading chart...</p>,
+});
+```
+
+## SEO and Accessibility
+
+### Semantic HTML
+
+Use proper heading hierarchy and semantic elements:
+
+```mdx
+# Main Title (h1)
+
+## Section Title (h2)
+
+### Subsection (h3)
+
+Use proper list structures:
+
+- First item
+- Second item
+- Third item
+```
+
+### Alt Text and ARIA Labels
+
+Always provide descriptive alt text:
+
+```mdx
+![Screenshot of the dashboard showing user analytics and key metrics](/images/dashboard-screenshot.png)
+```
+
+## Conclusion
+
+MDX bridges the gap between simple Markdown and complex web applications. It's perfect for:
+
+- Documentation sites
+- Blogs with interactive elements
+- Educational content
+- Portfolio showcases
+
+Start experimenting with MDX in your next project and discover the possibilities of interactive content!
+
+For more information, check out:
+- [MDX Documentation](https://mdxjs.com/)
+- [Next.js MDX Guide](/docs/mdx-integration)
+- [Component Library](/docs/components)

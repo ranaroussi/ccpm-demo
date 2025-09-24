@@ -1,0 +1,313 @@
+---
+title: API Overview
+description: Learn about our RESTful API, authentication, and core concepts.
+order: 0
+published: true
+---
+
+# API Overview
+
+Our platform provides a comprehensive RESTful API that allows you to integrate with external services, build custom applications, and automate workflows.
+
+## Base URL
+
+All API requests should be made to:
+
+```
+https://api.example.com/v1
+```
+
+## Authentication
+
+We use API keys for authentication. Include your API key in the `Authorization` header:
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://api.example.com/v1/projects
+```
+
+### Getting Your API Key
+
+1. Navigate to your account settings
+2. Go to the "API Keys" section
+3. Click "Generate New Key"
+4. Copy and securely store your key
+
+> **Important**: Keep your API keys secure and never expose them in client-side code.
+
+## Request Format
+
+### Headers
+
+Include these headers with every request:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+Accept: application/json
+```
+
+### Request Body
+
+For POST and PUT requests, send data as JSON:
+
+```json
+{
+  "name": "My Project",
+  "description": "A sample project",
+  "settings": {
+    "public": true,
+    "region": "us-east-1"
+  }
+}
+```
+
+## Response Format
+
+### Success Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "proj_123456",
+    "name": "My Project",
+    "created_at": "2025-01-15T10:30:00Z"
+  },
+  "meta": {
+    "request_id": "req_789012"
+  }
+}
+```
+
+### Error Response
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Project name is required",
+    "details": {
+      "field": "name",
+      "reason": "missing_field"
+    }
+  },
+  "meta": {
+    "request_id": "req_789013"
+  }
+}
+```
+
+## HTTP Status Codes
+
+| Code | Description |
+|------|-------------|
+| `200` | Success |
+| `201` | Created |
+| `400` | Bad Request |
+| `401` | Unauthorized |
+| `403` | Forbidden |
+| `404` | Not Found |
+| `422` | Validation Error |
+| `429` | Rate Limited |
+| `500` | Internal Server Error |
+
+## Rate Limiting
+
+API requests are rate limited to prevent abuse:
+
+- **Standard Plan**: 1,000 requests per hour
+- **Pro Plan**: 10,000 requests per hour
+- **Enterprise Plan**: 100,000 requests per hour
+
+Rate limit information is included in response headers:
+
+```http
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1642679400
+```
+
+## Pagination
+
+Large result sets are paginated using cursor-based pagination:
+
+```http
+GET /v1/projects?limit=50&cursor=eyJpZCI6InByb2pfMTIzIn0
+```
+
+Response includes pagination metadata:
+
+```json
+{
+  "success": true,
+  "data": [...],
+  "pagination": {
+    "has_next": true,
+    "has_prev": false,
+    "next_cursor": "eyJpZCI6InByb2pfNDU2In0",
+    "prev_cursor": null,
+    "total_count": 150
+  }
+}
+```
+
+## Filtering and Sorting
+
+### Filtering
+
+Use query parameters to filter results:
+
+```http
+GET /v1/projects?status=active&region=us-east-1&created_after=2025-01-01
+```
+
+### Sorting
+
+Sort results using the `sort` parameter:
+
+```http
+GET /v1/projects?sort=-created_at,name
+```
+
+- Use `-` prefix for descending order
+- Multiple fields separated by commas
+
+## Webhooks
+
+Subscribe to real-time events using webhooks:
+
+```json
+{
+  "url": "https://your-app.com/webhook",
+  "events": ["project.created", "project.updated"],
+  "secret": "your_webhook_secret"
+}
+```
+
+### Webhook Payload
+
+```json
+{
+  "id": "evt_123456",
+  "type": "project.created",
+  "data": {
+    "id": "proj_789012",
+    "name": "New Project"
+  },
+  "created_at": "2025-01-15T10:30:00Z"
+}
+```
+
+### Verification
+
+Verify webhook authenticity using the signature header:
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhook(payload, signature, secret) {
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+
+  return signature === `sha256=${expectedSignature}`;
+}
+```
+
+## SDK and Libraries
+
+We provide official SDKs for popular languages:
+
+### JavaScript/Node.js
+
+```bash
+npm install @example/platform-sdk
+```
+
+```javascript
+import { Platform } from '@example/platform-sdk';
+
+const platform = new Platform({
+  apiKey: process.env.PLATFORM_API_KEY,
+});
+
+const projects = await platform.projects.list();
+```
+
+### Python
+
+```bash
+pip install platform-python
+```
+
+```python
+from platform import Platform
+
+client = Platform(api_key=os.environ['PLATFORM_API_KEY'])
+projects = client.projects.list()
+```
+
+### Go
+
+```bash
+go get github.com/example/platform-go
+```
+
+```go
+import "github.com/example/platform-go"
+
+client := platform.NewClient("your-api-key")
+projects, err := client.Projects.List()
+```
+
+## Error Handling
+
+### Common Error Codes
+
+| Code | Description | Solution |
+|------|-------------|----------|
+| `INVALID_API_KEY` | API key is missing or invalid | Check your API key |
+| `INSUFFICIENT_PERMISSIONS` | API key lacks required permissions | Update key permissions |
+| `RESOURCE_NOT_FOUND` | Requested resource doesn't exist | Verify resource ID |
+| `VALIDATION_ERROR` | Request data is invalid | Check request format |
+| `RATE_LIMIT_EXCEEDED` | Too many requests | Implement backoff strategy |
+
+### Retry Strategy
+
+Implement exponential backoff for rate limits and server errors:
+
+```javascript
+async function apiCallWithRetry(apiCall, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await apiCall();
+    } catch (error) {
+      if (error.status === 429 || error.status >= 500) {
+        const delay = Math.pow(2, attempt) * 1000; // Exponential backoff
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      throw error;
+    }
+  }
+}
+```
+
+## Next Steps
+
+Now that you understand the API basics:
+
+1. **[Authentication Guide](/docs/api/authentication)** - Detailed auth setup
+2. **[Projects API](/docs/api/projects)** - Manage your projects
+3. **[Users API](/docs/api/users)** - User management
+4. **[Webhooks Guide](/docs/api/webhooks)** - Real-time events
+5. **[SDK Documentation](/docs/api/sdks)** - Language-specific guides
+
+## Need Help?
+
+- Browse our [API Reference](/docs/api-reference) for detailed endpoint documentation
+- Check out [example integrations](/docs/examples) for common use cases
+- Join our [developer community](https://community.example.com) for support

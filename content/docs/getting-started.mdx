@@ -1,0 +1,194 @@
+---
+title: Getting Started
+description: Set up your account and create your first project with our platform.
+order: 1
+published: true
+---
+
+# Getting Started
+
+Welcome! This guide will help you set up your account and create your first project in just a few minutes.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
+- A valid email address
+- Basic familiarity with web development concepts
+
+## Step 1: Create Your Account
+
+1. **Navigate to the signup page**
+
+   Visit [https://platform.example.com/signup](https://platform.example.com/signup)
+
+2. **Fill out the registration form**
+
+   Provide the following information:
+   - Full name
+   - Email address
+   - Strong password (at least 8 characters)
+   - Company name (optional)
+
+3. **Verify your email**
+
+   Check your inbox for a verification email and click the confirmation link.
+
+## Step 2: Set Up Your Profile
+
+Once your account is verified:
+
+1. **Complete your profile**
+   - Add a profile picture
+   - Set your timezone
+   - Choose your preferences
+
+2. **Configure notifications**
+   - Email preferences
+   - In-app notifications
+   - Security alerts
+
+## Step 3: Create Your First Project
+
+Now let's create your first project:
+
+1. **Access the dashboard**
+
+   Log in to your account and you'll see the main dashboard.
+
+2. **Click "New Project"**
+
+   Look for the bright blue "New Project" button in the top-right corner.
+
+3. **Choose a project template**
+
+   Select from our available templates:
+   - **Starter**: Basic setup with essential features
+   - **E-commerce**: Online store with payment integration
+   - **Blog**: Content management and publishing
+   - **Portfolio**: Showcase your work and skills
+   - **Custom**: Start from scratch
+
+4. **Configure project settings**
+
+   ```json
+   {
+     "name": "my-first-project",
+     "template": "starter",
+     "region": "us-east-1",
+     "environment": "development"
+   }
+   ```
+
+5. **Deploy your project**
+
+   Click "Create & Deploy" to initialize your project.
+
+## Step 4: Explore Your Project
+
+After deployment, you'll have access to:
+
+### Dashboard Overview
+
+- **Project Status**: Monitor health and performance
+- **Recent Activity**: See latest changes and updates
+- **Quick Actions**: Common tasks and shortcuts
+- **Resource Usage**: Track your consumption
+
+### Development Environment
+
+Access your development tools:
+
+```bash
+# Clone your project repository
+git clone https://github.com/yourusername/my-first-project.git
+
+# Install dependencies
+cd my-first-project
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Configuration Panel
+
+Customize your project settings:
+
+- **Domain Settings**: Custom domains and SSL
+- **Environment Variables**: Secure configuration
+- **Integrations**: Third-party services
+- **Team Management**: Collaborate with others
+
+## Step 5: Make Your First Change
+
+Let's make a simple change to see the workflow:
+
+1. **Edit a file**
+
+   Open `src/pages/index.js` and modify the title:
+
+   ```javascript
+   export default function Home() {
+     return (
+       <div>
+         <h1>Welcome to My First Project!</h1>
+         <p>This is my customized homepage.</p>
+       </div>
+     );
+   }
+   ```
+
+2. **Preview your changes**
+
+   Your development server will automatically reload to show changes.
+
+3. **Deploy to production**
+
+   ```bash
+   git add .
+   git commit -m "Update homepage title"
+   git push origin main
+   ```
+
+4. **Monitor deployment**
+
+   Watch the deployment progress in your dashboard.
+
+## Next Steps
+
+Congratulations! You've successfully:
+- ✅ Created your account
+- ✅ Set up your first project
+- ✅ Made your first deployment
+- ✅ Customized your application
+
+### What's Next?
+
+Now that you have the basics, explore these areas:
+
+1. **[Architecture Overview](/docs/architecture)** - Understanding the system
+2. **[API Integration](/docs/api)** - Connect external services
+3. **[Authentication Setup](/docs/auth)** - Secure your application
+4. **[Database Configuration](/docs/data)** - Store and manage data
+5. **[Deployment Guide](/docs/deployment)** - Production best practices
+
+### Need Help?
+
+If you run into any issues:
+
+- Check our [FAQ](/docs/faq) for common questions
+- Visit our [Community Forum](https://community.example.com)
+- Contact [support@example.com](mailto:support@example.com)
+- Join our [Discord server](https://discord.gg/example)
+
+### Example Projects
+
+Learn from real examples:
+
+- [E-commerce Store](https://github.com/example/ecommerce-demo)
+- [Blog Platform](https://github.com/example/blog-demo)
+- [Portfolio Site](https://github.com/example/portfolio-demo)
+
+Ready to dive deeper? Continue with our [Installation Guide](/docs/installation) to set up local development tools.
