@@ -107,7 +107,7 @@ export function getBlogPost(slug: string): BlogPost | null {
       content,
       readingTime: readingTime(content),
     };
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }
@@ -181,7 +181,7 @@ export function getDocsPage(pathSegments: string[]): DocsPage | null {
       content,
       path: pathSegments,
     };
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }

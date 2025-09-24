@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllBlogPosts, getAllTags, getPaginatedBlogPosts } from '@/lib/mdx';
+import { getAllTags, getPaginatedBlogPosts } from '@/lib/mdx';
 
 interface BlogPageProps {
   searchParams: {

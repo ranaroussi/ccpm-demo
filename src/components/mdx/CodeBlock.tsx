@@ -25,7 +25,7 @@ export function CodeBlock({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      console.error('Failed to copy code:', error);
+      // Failed to copy code - ignore error silently
     }
   };
 
