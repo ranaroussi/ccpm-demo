@@ -7,7 +7,10 @@ branch: epic/base-nextjs-app
 
 ## Active Tasks
 
-- Task #2: Project Foundation - Started 2025-09-24T19:07:00Z
+- Task #3: Database & Prisma Setup - Started 2025-09-24T19:15:00Z
+- Task #6: MDX Content System - Started 2025-09-24T19:15:00Z
+- Task #7: shadcn/ui Setup - Started 2025-09-24T19:15:00Z
+- Task #10: Docker & Deployment - Started 2025-09-24T19:15:00Z
 
 ## Queued Issues
 
@@ -37,4 +40,4 @@ branch: epic/base-nextjs-app
 
 ## Completed
 
-- None yet
+- Task #2: Project Foundation - Completed 2025-09-24T19:14:00Z
